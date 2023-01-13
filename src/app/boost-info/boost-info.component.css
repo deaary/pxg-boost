@@ -1,0 +1,22 @@
+div{
+    display: flex;
+    justify-content: center;    
+}
+
+button{
+    position: absolute;
+    right: 10px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+button {
+    justify-content: end;
+}
+

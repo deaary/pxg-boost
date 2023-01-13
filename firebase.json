@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/boost-px-g",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

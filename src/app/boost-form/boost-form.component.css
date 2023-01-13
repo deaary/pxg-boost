@@ -1,0 +1,13 @@
+h1{
+    text-align: center;
+}
+
+form{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+mat-form-field{
+    margin-top: 20px;
+}

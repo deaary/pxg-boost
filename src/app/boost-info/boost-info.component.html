@@ -1,0 +1,16 @@
+<main>
+    <div>
+        <h2>Boost Stats</h2>
+        <button (click)="close()" type="button" mat-icon-button>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+
+    <section mat-dialog-content>
+        <p>There is left <b>{{ boost.leftStones }}</b> stones to put your pokemon + {{ boost.desiredBoost }}.</p>
+        <p *ngIf="boost.stonePrice else noPrice">It will cost you <b>{{ desired }}</b>.</p>
+        <ng-template #noPrice></ng-template>
+        <p *ngIf="boost.stoneToBS else noBS">On boost <b>{{ boost.stoneToBS }}</b> it's worth to use Boost Stone</p>
+        <ng-template #noBS></ng-template>
+    </section>
+</main>
