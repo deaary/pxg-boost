@@ -20,3 +20,11 @@ button {
     justify-content: end;
 }
 
+.result{
+    display: flex;
+    flex-direction: column;
+}
+
+.total{
+    color: chartreuse;
+}

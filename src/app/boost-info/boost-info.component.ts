@@ -17,14 +17,15 @@ export class BoostInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataBoost()
-    console.log(this.boost.stoneToBS);
-    
+    console.log(this.boost.splitStones);
   }
 
   dataBoost(): void {
     this.boost = this.data.datakey   
     let priceToDesired = this.boost.leftStones * this.boost.stonePrice
     this.desired = priceToDesired 
+    
+    
   }
 
   close(): void { 
