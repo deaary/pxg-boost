@@ -7,13 +7,15 @@
     </div>
 
     <section mat-dialog-content>
-        <p>There is left <b>{{ boost.leftStones }}</b> stones to put your pokemon + {{ boost.desiredBoost }}.</p>
-        <div *ngIf="boost.stonePrice else noPrice" class="result">
-            <p>It will cost you <b>{{ desired }}</b>.</p>
-            <p>On boost <b>{{ boost.stoneToBS }}</b> it's worth to use Boost Stone</p>
-            <p>this way you will spend <b>{{ boost.splitStones[0] }} {{ boost.stoneName }}s</b>
+        <p>There is left <b>{{ boost.leftStones }}</b> stones to put your pokemon +{{ boost.desiredBoost }}.</p>
+        <p *ngIf="boost.stonePrice else noPrice">It will cost <b>{{ desired }}dl</b>.</p>
+        <div *ngIf="boost.stonePrice && boost.stoneToBS else noPrice" class="result">
+            
+            <p>On boost <b>{{ boost.stoneToBS }}</b> it's worth to use Boost Stone.</p>
+            <p>This way you will spend <b>{{ boost.splitStones[0] }} {{ boost.stoneName }}s</b>
                 and <b>{{ boost.splitStones[2] }} Boost Stones</b>.</p>
-            <p>It will cost you <b>{{ boost.splitStones[1] }}</b> with <b>{{ boost.stoneName }}s</b> and <b>{{ boost.splitStones[3] }}</b> with Boost Stones. <b class="total">{{ boost.splitStones[1] + boost.splitStones[3] }}</b> Total.</p>
+            <p>It will cost you <b>{{ boost.splitStones[1] }}dl</b> with <b>{{ boost.stoneName }}s</b> and <b>{{ boost.splitStones[3] }}dl</b> with <b>Boost Stones</b>.</p>
+            <p><b class="total">Total = {{ boost.splitStones[1] + boost.splitStones[3] }}dl</b></p>
         </div>
         <ng-template #noPrice></ng-template>
     </section>

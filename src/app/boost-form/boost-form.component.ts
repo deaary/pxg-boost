@@ -32,22 +32,24 @@ export class BoostFormComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  calcularBoost(): void {
+  calcularBoost(): void {    
     let boost = this.boostForm.value;
     let current = boost.currentBoost;
     let desired = boost.desiredBoost;
-    let priceStone = parseFloat(boost.price)
-    let priceBS = parseFloat(boost.boostStonePrice)
+    let priceStone = boost.price
+    let priceBS = boost.boostStonePrice
     let stonesLeft = 0;
     let arrayBoost: number[] = [];
     let worthBS = 0;
     let totalStonesPrice = 0;
     let perBoostPrice = 0;
     let splitStonesValue: number[] = []
+    let indexCurrent = current
 
     this.boostCalc(boost.stoneName).subscribe((resp) => {
-      arrayBoost = resp;
-
+      arrayBoost = resp;      
+      console.log('aqui');
+      
       if (current === 0) {
         stonesLeft = arrayBoost[desired - 1];
         totalStonesPrice = stonesLeft * priceStone;
@@ -55,30 +57,24 @@ export class BoostFormComponent implements OnInit {
         stonesLeft = arrayBoost[desired - 1] - arrayBoost[current - 1];
         totalStonesPrice = stonesLeft * priceStone;
       }
-      let index = current
       
-      for (let i = index; i < desired; index++) {       
-        
-        
-        if (index === 0) {
-          perBoostPrice = 0          
-          
-          
-          
+      console.log('vai');
+      
+      for (let i = indexCurrent; i < desired; indexCurrent++) {
+        if (indexCurrent === 0) {
+          perBoostPrice = 0
         } else {
-          perBoostPrice = (arrayBoost[index] - arrayBoost[index - 1]) * priceStone;
-          
+          perBoostPrice = (arrayBoost[indexCurrent] - arrayBoost[indexCurrent - 1]) * priceStone;
         }
-       
-        
         if (perBoostPrice > priceBS) {
-          worthBS = index;
+          worthBS = indexCurrent;
           i = desired + 1;
-                   
+        } else {
+          i++
         }
-        
-      }      
-      
+      }
+      console.log('pra la');
+
       splitStonesValue.push(current === 0 ? arrayBoost[worthBS - 1] : arrayBoost[worthBS - 1] - arrayBoost[current - 1], current === 0 ? arrayBoost[worthBS - 1] * priceStone : (arrayBoost[worthBS - 1] - arrayBoost[current - 1]) * priceStone, desired - worthBS, (desired - worthBS) * priceBS)
 
       const dialogRef = this.dialog.open(BoostInfoComponent, {
@@ -99,13 +95,15 @@ export class BoostFormComponent implements OnInit {
     let sumStone = 0;
     let arrayStones: number[] = []
 
-    if (stoneName === 'Metal Stone' || stoneName === 'Ancient Stone' || stoneName === 'Crystal Stone') {
+    if (stoneName == 'Metal Stone' || stoneName == 'Ancient Stone' || stoneName == 'Crystal Stone') {
       for (let i = 0; i < desired; i++) {
+        console.log(stoneName);
+        
         if (i < 10) {
           i++;
           addStone = 1;
           sumStone = sumStone + addStone;
-          arrayStones.push(0, sumStone);
+          arrayStones.push(sumStone, sumStone);
         } else if (i % boost.boost == 0) {
           addStone = addStone + 1;
           sumStone = sumStone + addStone;

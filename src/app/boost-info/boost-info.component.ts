@@ -16,8 +16,7 @@ export class BoostInfoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.dataBoost()
-    console.log(this.boost.splitStones);
+    this.dataBoost()    
   }
 
   dataBoost(): void {
