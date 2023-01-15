@@ -9,7 +9,7 @@
     <section mat-dialog-content>
         <p>There is left <b>{{ boost.leftStones }}</b> stones to put your pokemon +{{ boost.desiredBoost }}.</p>
         <p *ngIf="boost.stonePrice else noPrice">It will cost <b>{{ desired }}dl</b>.</p>
-        <div *ngIf="boost.stonePrice && boost.stoneToBS else noPrice" class="result">
+        <div *ngIf="boost.stonePrice && boost.stoneToBS || boost.bsZero else noPrice" class="result">
             
             <p>On boost <b>{{ boost.stoneToBS }}</b> it's worth to use Boost Stone.</p>
             <p>This way you will spend <b>{{ boost.splitStones[0] }} {{ boost.stoneName }}s</b>

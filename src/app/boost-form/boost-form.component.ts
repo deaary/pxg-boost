@@ -19,7 +19,7 @@ export class BoostFormComponent implements OnInit {
   boostForm: FormGroup = this.formBuilder.group({
     stoneName: ['', [Validators.required]],
     currentBoost: ['', [Validators.required, Validators.min(0), Validators.max(49)]],
-    desiredBoost: ['', [Validators.required, Validators.max(50)]],
+    desiredBoost: ['', [Validators.required, Validators.max(50), Validators.min(1)]],
     price: [''],
     boostStonePrice: [''],
     boost: ['', [Validators.required]]
@@ -43,8 +43,9 @@ export class BoostFormComponent implements OnInit {
     let worthBS = 0;
     let totalStonesPrice = 0;
     let perBoostPrice = 0;
-    let splitStonesValue: number[] = []
-    let indexCurrent = current
+    let splitStonesValue: number[] = [];
+    let indexCurrent = current;
+    let bsBetter = false;
 
     this.boostCalc(boost.stoneName).subscribe((resp) => {
       arrayBoost = resp;
@@ -58,27 +59,39 @@ export class BoostFormComponent implements OnInit {
       }
 
       for (let i = indexCurrent; i < desired; indexCurrent++) {
+        perBoostPrice = (arrayBoost[indexCurrent] - arrayBoost[indexCurrent - 1]) * priceStone;
+
+        if (priceStone > priceBS) {
+          bsBetter = true;
+          worthBS = 0;
+          i = desired + 1;
+        } else if (perBoostPrice > priceBS) {
+          worthBS = indexCurrent;
+          i = desired + 1;
+        }
+        else {
+          i++
+        }
+
         if (indexCurrent === 0) {
           perBoostPrice = 0
         } else {
           perBoostPrice = (arrayBoost[indexCurrent] - arrayBoost[indexCurrent - 1]) * priceStone;
-        }
-        if (perBoostPrice > priceBS) {
-          worthBS = indexCurrent;
-          i = desired + 1;
-        } else {
-          i++
-        }
-      }     
+        }        
+      }
 
-      splitStonesValue.push(current === 0 ? arrayBoost[worthBS - 1] : arrayBoost[worthBS - 1] - arrayBoost[current - 1], current === 0 ? arrayBoost[worthBS - 1] * priceStone : (arrayBoost[worthBS - 1] - arrayBoost[current - 1]) * priceStone, desired - worthBS, (desired - worthBS) * priceBS)
+      if (worthBS === 0) {
+        splitStonesValue.push(0, 0, desired - worthBS, (desired - worthBS) * priceBS)
+      } else {
+        splitStonesValue.push(current === 0 ? arrayBoost[worthBS - 1] : arrayBoost[worthBS - 1] - arrayBoost[current - 1], current === 0 ? arrayBoost[worthBS - 1] * priceStone : (arrayBoost[worthBS - 1] - arrayBoost[current - 1]) * priceStone, desired - worthBS, (desired - worthBS) * priceBS)
+      }
 
       const dialogRef = this.dialog.open(BoostInfoComponent, {
         disableClose: true,
         width: 'auto',
         height: 'auto',
         data: {
-          datakey: { leftStones: stonesLeft, stonePrice: priceStone, desiredBoost: desired, stoneToBS: worthBS, splitStones: splitStonesValue, stoneName: boost.stoneName }
+          datakey: { leftStones: stonesLeft, stonePrice: priceStone, desiredBoost: desired, stoneToBS: worthBS, splitStones: splitStonesValue, stoneName: boost.stoneName, bsZero: bsBetter }
         }
       })
     })
@@ -92,7 +105,7 @@ export class BoostFormComponent implements OnInit {
     let arrayStones: number[] = []
 
     if (stoneName == 'Metal Stone' || stoneName == 'Ancient Stone' || stoneName == 'Crystal Stone') {
-      for (let i = 0; i < desired; i++) {        
+      for (let i = 0; i < desired; i++) {
 
         if (i < 10) {
           i++;
@@ -107,7 +120,7 @@ export class BoostFormComponent implements OnInit {
           sumStone = sumStone + addStone;
           arrayStones.push(sumStone);
         }
-      }      
+      }
       return of(arrayStones)
     } else {
       for (let i = 0; i < desired; i++) {
