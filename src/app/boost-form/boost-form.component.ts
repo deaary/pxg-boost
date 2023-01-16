@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, of, timeInterval } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { BoostInfoComponent } from '../boost-info/boost-info.component';
 
 @Component({
@@ -12,9 +12,11 @@ import { BoostInfoComponent } from '../boost-info/boost-info.component';
 export class BoostFormComponent implements OnInit {
 
   stones: string[] =
-    ['Mystic Star', 'Ancient Stone', 'Metal Stone', 'Crystal Stone', 'Enigma Stone', 'Punch Stone', 'Ice Stone', 'Fire Stone', 'Rock Stone', 'Earth Stone', 'Venom Stone', 'Thunder Stone', 'Water Stone', 'Cocoon Stone', 'Leaf Stone', 'Feather Stone', 'Heart Stone', 'Darkness Stone', 'Dimensional Stone', 'Mirror Stone']
+    ['Mystic Star', 'Ancient Stone', 'Metal Stone', 'Crystal Stone', 'Enigma Stone', 'Punch Stone', 'Ice Stone', 'Fire Stone', 'Rock Stone', 'Earth Stone', 'Venom Stone', 'Thunder Stone', 'Water Stone', 'Cocoon Stone', 'Leaf Stone', 'Feather Stone', 'Heart Stone', 'Darkness Stone', 'Dimensional Stone', 'Mirror Stone'];
 
-  boosts: number[] = [2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 50]
+  boosts: number[] = [];
+  boosts1: number[] = [2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 50];
+  boosts2: number[] = [30, 50];
 
   boostForm: FormGroup = this.formBuilder.group({
     stoneName: ['', [Validators.required]],
@@ -31,6 +33,16 @@ export class BoostFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void { }
+
+  checkStone() {
+    let getStone = this.boostForm.value.stoneName;
+
+    if (getStone === 'Metal Stone' || getStone === 'Crystal Stone' || getStone === 'Ancient Stone') {
+      this.boosts = this.boosts2
+    } else {
+      this.boosts = this.boosts1
+    }
+  }
 
   calcularBoost(): void {
     let boost = this.boostForm.value;
@@ -77,7 +89,7 @@ export class BoostFormComponent implements OnInit {
           perBoostPrice = 0
         } else {
           perBoostPrice = (arrayBoost[indexCurrent] - arrayBoost[indexCurrent - 1]) * priceStone;
-        }        
+        }
       }
 
       if (worthBS === 0) {
@@ -137,7 +149,7 @@ export class BoostFormComponent implements OnInit {
     }
   }
 
-  reloadPage(): void{
+  reloadPage(): void {
     window.location.reload();
   }
 }

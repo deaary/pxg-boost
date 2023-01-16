@@ -1,4 +1,4 @@
-<section mat-dialog-content> 
+<section mat-dialog-content>
 
     <form [formGroup]="boostForm">
 
@@ -7,13 +7,13 @@
         <mat-form-field appearance="fill">
             <mat-label>Stone Name</mat-label>
             <mat-select formControlName="stoneName" name="stoneName">
-                <mat-option *ngFor="let stone of stones" [value]="stone">
+                <mat-option (blur)="checkStone()" *ngFor="let stone of stones" [value]="stone">
                     {{stone}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" >
+        <mat-form-field appearance="fill">
             <mat-label>Current Boost</mat-label>
             <input class="noStyle" type="number" matInput placeholder="Ex: 20" formControlName="currentBoost">
             <mat-error>The boost must be less or equal to 49</mat-error>
@@ -27,7 +27,8 @@
 
         <mat-form-field appearance="fill">
             <mat-label>Stone Average Price</mat-label>
-            <input class="noStyle" type="number" name="stone-price" matInput placeholder="Ex: 8000" formControlName="price">
+            <input class="noStyle" type="number" name="stone-price" matInput placeholder="Ex: 8000"
+                formControlName="price">
             <mat-error></mat-error>
         </mat-form-field>
 
