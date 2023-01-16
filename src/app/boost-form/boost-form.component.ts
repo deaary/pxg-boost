@@ -12,7 +12,7 @@ import { BoostInfoComponent } from '../boost-info/boost-info.component';
 export class BoostFormComponent implements OnInit {
 
   stones: string[] =
-    ['Mystic Star', 'Ancient Stone', 'Metal Stone', 'Crystal Stone', 'Enigma Stone', 'Punch Stone', 'Ice Stone', 'Fire Stone', 'Rock Stone', 'Earth Stone', 'Venom Stone', 'Thunder Stone', 'Water Stone', 'Cocoon Stone', 'Leaf Stone', 'Feather Stone', 'Heart Stone', 'Darkness Stone']
+    ['Mystic Star', 'Ancient Stone', 'Metal Stone', 'Crystal Stone', 'Enigma Stone', 'Punch Stone', 'Ice Stone', 'Fire Stone', 'Rock Stone', 'Earth Stone', 'Venom Stone', 'Thunder Stone', 'Water Stone', 'Cocoon Stone', 'Leaf Stone', 'Feather Stone', 'Heart Stone', 'Darkness Stone', 'Dimensional Stone', 'Mirror Stone']
 
   boosts: number[] = [2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 50]
 
@@ -135,5 +135,9 @@ export class BoostFormComponent implements OnInit {
       }
       return of(arrayStones)
     }
+  }
+
+  reloadPage(): void{
+    window.location.reload();
   }
 }

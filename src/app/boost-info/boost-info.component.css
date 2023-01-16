@@ -28,3 +28,11 @@ button {
 .total{
     color: rgb(12, 153, 59);
 }
+
+section .mat-dialog-content {
+    overflow-x: hidden;
+}
+
+main {
+    background-color: antiquewhite;
+}

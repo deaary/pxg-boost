@@ -1,53 +1,61 @@
-<h1 mat-dialog-title>Boost PxG</h1>
+<section mat-dialog-content> 
 
-<section mat-dialog-content>
-    <form [formGroup]="boostForm" (ngSubmit)="calcularBoost()">
+    <form [formGroup]="boostForm">
+
+        <h1 mat-dialog-title>Boost PxG</h1>
 
         <mat-form-field appearance="fill">
             <mat-label>Stone Name</mat-label>
-            <mat-select formControlName="stoneName" name="stoneName">                
+            <mat-select formControlName="stoneName" name="stoneName">
                 <mat-option *ngFor="let stone of stones" [value]="stone">
                     {{stone}}
-                </mat-option>                
+                </mat-option>
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" >
             <mat-label>Current Boost</mat-label>
-            <input type="number" matInput placeholder="Ex: 20" formControlName="currentBoost">
+            <input class="noStyle" type="number" matInput placeholder="Ex: 20" formControlName="currentBoost">
             <mat-error>The boost must be less or equal to 49</mat-error>
-        </mat-form-field>       
-        
+        </mat-form-field>
+
         <mat-form-field appearance="fill">
             <mat-label>Desired Boost</mat-label>
-            <input type="number" matInput placeholder="Ex: 50" formControlName="desiredBoost">
+            <input class="noStyle" type="number" matInput placeholder="Ex: 50" formControlName="desiredBoost">
             <mat-error>The boost must be less or equal to 50</mat-error>
-        </mat-form-field>    
+        </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Stone Average Price</mat-label>
-            <input type="number" name="stone-price" matInput placeholder="Ex: 8000" formControlName="price">
+            <input class="noStyle" type="number" name="stone-price" matInput placeholder="Ex: 8000" formControlName="price">
             <mat-error></mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Boost Stone Price</mat-label>
-            <input type="number" name="boost-stone-price" matInput placeholder="Ex: 180000" formControlName="boostStonePrice">
+            <input class="noStyle" type="number" name="boost-stone-price" matInput placeholder="Ex: 180000"
+                formControlName="boostStonePrice">
             <mat-error></mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Boost Cycle</mat-label>
-            <mat-select formControlName="boost" name="boost">                
+            <mat-select formControlName="boost" name="boost">
                 <mat-option *ngFor="let boost of boosts" [value]="boost">
                     {{boost}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
-        <button type="submit" [disabled]="boostForm.invalid" mat-raised-button color="accent">
-            calcular
-        </button>
+        <div>
+            <button type="button" (click)="calcularBoost()" [disabled]="boostForm.invalid" mat-raised-button
+                color="accent">
+                CALC
+            </button><br>
+            <button type="button" class="spaceBtn" mat-raised-button (click)="reloadPage()" color="primary">
+                Clear
+            </button>
+        </div>
 
-    </form>   
+    </form>
 </section>

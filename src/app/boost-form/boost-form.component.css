@@ -1,5 +1,5 @@
 h1{
-    text-align: center;
+    color: bisque;
 }
 
 form{
@@ -9,5 +9,29 @@ form{
 }
 
 mat-form-field{
-    margin-top: 20px;
+    margin-top: 15px;
 }
+
+div {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;     
+}
+
+button {    
+    padding: 15px;   
+}
+
+section {    
+    min-height: 100vh;
+    background-color: rgba(39, 47, 67);
+}
+
+.spaceBtn {
+    margin-left: 10px;
+}
+
+.noStyle::-webkit-outer-spin-button,
+.noStyle::-webkit-inner-spin-button {
+    -webkit-appearance: none;   
+}   

@@ -28,7 +28,6 @@ export class BoostInfoComponent implements OnInit {
   }
 
   close(): void { 
-    this.dialogRef.close()
-    window.location.reload()
+    this.dialogRef.close()    
   }
 }
